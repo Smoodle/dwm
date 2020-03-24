@@ -9,7 +9,6 @@ This version includes:
 - Fullscreen toggle
 - Pertag
 - Gaps
-- Bar padding
 - Status par padding
 - Status bar on all monitors
 
