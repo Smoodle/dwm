@@ -38,6 +38,6 @@ get_time()
 }
 
 while true; do
-	xsetroot -name " $(get_battery) $(get_disk_usage) $(get_cpu) $(get_ram) $(get_date) $(get_time) "
+	xsetroot -name "$(get_battery) $(get_disk_usage) $(get_cpu) $(get_ram) $(get_date) $(get_time)"
 	sleep 10
 done
