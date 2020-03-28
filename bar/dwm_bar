@@ -1,0 +1,48 @@
+#!/bin/sh
+DISK=/dev/sda2
+BAT=BAT0
+
+get_music() {
+	[ "$(playerctl status 2> /dev/null)" = "Playing" ] &&
+		echo -e "  $(playerctl metadata title) - $(playerctl metadata artist)"
+
+	[ "$(playerctl status 2> /dev/null)" = "Paused" ] &&
+		echo -e "  $(playerctl metadata title) - $(playerctl metadata artist)"
+}
+
+get_battery() {
+	[ "$(ls -A /sys/class/power_supply/)" ] &&
+		echo -e "   $(cat /sys/class/power_supply/$BAT/capacity || "Failed to get batery")"
+}
+
+get_disk_usage() {
+	disk=$(df -h $DISK | grep /dev/ | awk '{print $5}')
+	echo -e "  $disk"
+}
+
+get_ram() {
+	mem=$(free | grep Mem | awk '{printf("%.2f%"), $3/$2 * 100.0}')
+	echo -e "  $mem"
+}
+
+get_cpu() {
+	cpu=$(grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {printf("%.2f%"), usage}')
+	echo -e "  $cpu"
+}
+
+get_date() {
+	echo -e "  $(date +'%d-%m-%y')"
+}
+
+get_time() {
+	echo -e " $(date +'%H:%M')"
+}
+
+separator() {
+	echo -e "⏽"
+}
+
+while true; do
+	xsetroot -name "$(get_music && separator) $(get_battery && separator) $(get_disk_usage && separator) $(get_cpu && separator) $(get_ram && separator) $(get_date && separator) $(get_time)"
+	sleep 1
+done
