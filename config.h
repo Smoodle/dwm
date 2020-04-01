@@ -128,6 +128,7 @@ static Key keys[] = {
 	{ 0, XF86XK_AudioRaiseVolume, spawn, {.v = volupcmd } },
 	{ 0, XF86XK_MonBrightnessUp, spawn, {.v = brupcmd} },
 	{ 0, XF86XK_MonBrightnessDown, spawn, {.v = brdowncmd} },
+	{ MODKEY|ShiftMask,             XK_p,  	   spawn,        SHCMD("sh ~/.config/dmneu/dmenu_shutdown") },
 };
 
 /* button definitions */

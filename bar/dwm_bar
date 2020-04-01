@@ -2,47 +2,59 @@
 DISK=/dev/sda2
 BAT=BAT0
 
+change_foregorund_color() {
+	echo -e "^c$1^"
+}
+
+change_background_color() {
+	echo -e "^b$1^"
+}
+
+reset_color() {
+	echo -e "^d^"
+}
+
 get_music() {
 	[ "$(playerctl status 2> /dev/null)" = "Playing" ] &&
-		echo -e "  $(playerctl metadata title) - $(playerctl metadata artist)"
+		echo -e "$(change_foregorund_color "#d8dee9")  $(reset_color)$(playerctl metadata title) - $(playerctl metadata artist)"
 
 	[ "$(playerctl status 2> /dev/null)" = "Paused" ] &&
-		echo -e "  $(playerctl metadata title) - $(playerctl metadata artist)"
+		echo -e "$(change_foregorund_color "#d8dee9")  $(playerctl metadata title) - $(reset_color)$(playerctl metadata artist)"
 }
 
 get_battery() {
 	[ "$(ls -A /sys/class/power_supply/)" ] &&
-		echo -e "   $(cat /sys/class/power_supply/$BAT/capacity || "Failed to get batery")"
+		echo -e "$(change_foregorund_color "#d8dee9")$(reset_color)   $(cat /sys/class/power_supply/$BAT/capacity || "Failed to get batery")"
 }
 
 get_disk_usage() {
 	disk=$(df -h $DISK | grep /dev/ | awk '{print $5}')
-	echo -e "  $disk"
+	echo -e "$(change_foregorund_color "#d8dee9")  $(reset_color)$disk"
 }
 
 get_ram() {
 	mem=$(free | grep Mem | awk '{printf("%.2f%"), $3/$2 * 100.0}')
-	echo -e "  $mem"
+	echo -e "$(change_foregorund_color "#d8dee9")  $(reset_color)$mem"
 }
 
 get_cpu() {
 	cpu=$(grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {printf("%.2f%"), usage}')
-	echo -e "  $cpu"
+	echo -e "$(change_foregorund_color "#d8dee9")  $(reset_color)$cpu"
 }
 
 get_date() {
-	echo -e "  $(date +'%d-%m-%y')"
+	echo -e "$(change_foregorund_color "#d8dee9")  $(reset_color)$(date +'%d-%m-%y')"
 }
 
 get_time() {
-	echo -e " $(date +'%H:%M')"
+	echo -e "$(change_foregorund_color "#d8dee9") $(reset_color)$(date +'%H:%M')"
 }
 
 separator() {
-	echo -e "⏽"
+	echo -e "$(change_foregorund_color "#5e81ac")⏽$(reset_color)"
 }
 
 while true; do
-	xsetroot -name "$(get_music && separator) $(get_battery && separator) $(get_disk_usage && separator) $(get_cpu && separator) $(get_ram && separator) $(get_date && separator) $(get_time)"
+	echo "$(get_music && separator) $(get_battery && separator) $(get_disk_usage && separator) $(get_cpu && separator) $(get_ram && separator) $(get_date && separator) $(get_time)"
 	sleep 1
 done
