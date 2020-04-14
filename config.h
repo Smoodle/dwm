@@ -83,9 +83,7 @@ static const char *brdowncmd[] = { "xbacklight", "-dec", "10", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          SHCMD("dmenu_run -p Run:") },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY|ShiftMask,             XK_p, 	   spawn,          {.v = printcmd } },
 	{ MODKEY|ShiftMask,             XK_l, 	   spawn,          {.v = lockcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -128,7 +126,9 @@ static Key keys[] = {
 	{ 0, XF86XK_AudioRaiseVolume, spawn, {.v = volupcmd } },
 	{ 0, XF86XK_MonBrightnessUp, spawn, {.v = brupcmd} },
 	{ 0, XF86XK_MonBrightnessDown, spawn, {.v = brdowncmd} },
-	{ MODKEY|ShiftMask,             XK_p,  	   spawn,        SHCMD("sh ~/.config/dmneu/dmenu_shutdown") },
+	{ MODKEY,                       XK_p,      spawn,          SHCMD("dmenu_run -p Run:") },
+	{ MODKEY|ShiftMask,             XK_p, 	   spawn,          SHCMD("sleep 0.2; scrot -s") },
+	{ MODKEY|ControlMask|ShiftMask,             XK_p,  	   spawn,        SHCMD("sh ~/.config/dmneu/dmenu_shutdown") },
 };
 
 /* button definitions */
