@@ -17,6 +17,7 @@ static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
 static const char col_purple[]      = "#871F78";
+
 static const char nord_dark[] 		= "#2e3440";
 static const char nord_dark2[] 		= "#4c566a";
 static const char nord_frost2[] 	= "#8fbcbb";
@@ -24,7 +25,7 @@ static const char nord_white[] 		= "#eceff4";
 
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { nord_white, nord_dark2, nord_dark2 },
+	[SchemeNorm] = { nord_dark2, nord_dark, nord_dark2 },
 	[SchemeSel]  = { nord_white, nord_dark, nord_frost2  },
 };
 
@@ -127,7 +128,7 @@ static Key keys[] = {
 	{ 0, XF86XK_MonBrightnessUp, spawn, {.v = brupcmd} },
 	{ 0, XF86XK_MonBrightnessDown, spawn, {.v = brdowncmd} },
 	{ MODKEY,                       XK_p,      spawn,          SHCMD("dmenu_run -p Run:") },
-	{ MODKEY|ShiftMask,             XK_p, 	   spawn,          SHCMD("sleep 0.2; scrot -s") },
+	{ MODKEY|ShiftMask,             XK_p, 	   spawn,          SHCMD("sleep 0.2; scrot -s -e 'mv $f ~/Screenshots'") },
 	{ MODKEY|ControlMask|ShiftMask,             XK_p,  	   spawn,        SHCMD("sh ~/.config/dmneu/dmenu_shutdown") },
 };
 
