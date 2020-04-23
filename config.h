@@ -8,8 +8,8 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int horizpadbar        = 2;        /* horizontal padding for statusbar */
-static const int vertpadbar         = 3;        /* vertical padding for statusbar */
-static const char *fonts[]          = { "Inconsolata Nerd Font:size=12", "monospace:size=10" };
+static const int vertpadbar         = 6;        /* vertical padding for statusbar */
+static const char *fonts[]          = { "Hack Nerd Font:size=12" };
 static const char dmenufont[]       = "Inconsolata Nerd Font:size=12";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -30,7 +30,8 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "一", "二", "三", "四", "五", "六", "七", "八", "九" };
+static const char *tags[]    = { "", "", "", "", "", "", "", "", "" };
+static const char *alttags[] = { "", "", "", "", "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -118,7 +119,7 @@ static Key keys[] = {
 	{ 0,                            XF86XK_MonBrightnessUp,    spawn,          SHCMD("xbacklight -inc 10") },
 	{ 0,                            XF86XK_MonBrightnessDown,  spawn,          SHCMD("xbacklight -dec 10") },
 	{ MODKEY|ShiftMask,             XK_Return,                 spawn,          SHCMD("st") },
-	{ MODKEY,                       XK_p,                      spawn,          SHCMD("dmenu_run -p Run:") },
+	{ MODKEY,                       XK_p,                      spawn,          SHCMD("rofi -show drun") },
 	{ MODKEY|ShiftMask,             XK_p, 	                   spawn,          SHCMD("sleep 0.2; scrot -s -e 'mv $f ~/Screenshots'") },
 	{ MODKEY|ControlMask|ShiftMask, XK_p,  	                   spawn,          SHCMD("sh ~/.config/dmneu/dmenu_shutdown") },
 };
