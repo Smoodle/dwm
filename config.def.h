@@ -41,6 +41,7 @@ static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
 static const int show_layout = 1;
+static const int show_name = 1;
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
