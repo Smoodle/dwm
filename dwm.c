@@ -865,12 +865,15 @@ drawbar(Monitor *m)
 
 	if ((w = m->ww - sw - x) > bh) {
 		if (m->sel) {
-
 				int mid = (m->ww - TEXTW(m->sel->name)) / 2 - x;
 				/* make sure name will not overlap on tags even when it is very long */
 				mid = mid >= lrpad / 2 ? mid : lrpad / 2;
 				drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
-				drw_text(drw, x, 0, w, bh, mid, show_name == 1 ? m->sel->name : "", 0);
+				if(center_name == 1)
+					drw_text(drw, x, 0, w, bh, mid, show_name == 1 ? m->sel->name : "", 0);
+				else
+					drw_text(drw, x, 0, w, bh, lrpad / 2, show_name == 1 ? m->sel->name : "", 0);
+
 
 			if (m->sel->isfloating)
 				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
@@ -1251,7 +1254,7 @@ monocle(Monitor *m)
 	for (c = m->clients; c; c = c->next)
 		if (ISVISIBLE(c))
 			n++;
-	if (n > 0) /* override layout symbol */
+	if (n > 0 && show_monocle_number == 1) /* override layout symbol */
 		snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n);
 	for (c = nexttiled(m->clients); c; c = nexttiled(c->next))
 		resize(c, m->wx, m->wy, m->ww - 2 * c->bw, m->wh - 2 * c->bw, 0);

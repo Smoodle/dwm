@@ -42,6 +42,8 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 
 static const int show_layout = 1;
 static const int show_name = 1;
+static const int center_name = 0;
+static const int show_monocle_number = 1;
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */

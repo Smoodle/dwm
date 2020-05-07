@@ -11,27 +11,23 @@ static const int horizpadbar        = 2;        /* horizontal padding for status
 static const int vertpadbar         = 6;        /* vertical padding for statusbar */
 static const char *fonts[]          = { "Hack Nerd Font:size=12" };
 static const char dmenufont[]       = "Inconsolata Nerd Font:size=12";
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
-static const char col_purple[]      = "#871F78";
 
-static const char nord_dark[] 		= "#2e3440";
-static const char nord_dark2[] 		= "#4c566a";
-static const char nord_frost2[] 	= "#8fbcbb";
-static const char nord_white[] 		= "#eceff4";
+static const char fg_norm[] = "#bbbbbb";
+static const char fg_selected[] = "#cc6666";
+static const char bg_norm[] = "#1d1f21";
+static const char bg_selected[] = "#1d1f21";
+static const char border_norm[] = "#373b41";
+static const char border_selected[] = "#cc6666";
 
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { nord_dark2, nord_dark, nord_dark2 },
-	[SchemeSel]  = { nord_white, nord_dark, nord_frost2  },
+	[SchemeNorm] = { fg_norm, bg_norm, border_norm },
+	[SchemeSel]  = { fg_selected, bg_selected, border_selected  },
 };
 
 /* tagging */
-static const char *tags[]    = { "", "", "", "", "", "", "", "", "" };
-static const char *alttags[] = { "", "", "", "", "", "", "", "", "" };
+static const char *tags[]    = { "", "", "", "", "" };
+static const char *alttags[] = { "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -48,14 +44,17 @@ static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] 
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
-static const int show_layout = 0;
-static const int show_name = 0;
+static const int show_layout = 1;
+static const int show_name = 1;
+static const int center_name = 0;
+
+static const int show_monocle_number = 0;
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "",      tile },    /* first entry is default */
-	{ "זּ",      NULL },    /* no layout function means floating behavior */
-	{ "",     monocle },
+	{ ": Tile :",      tile },    /* first entry is default */
+	{ ": Float :",     NULL },    /* no layout function means floating behavior */
+	{ ": Monocle :",   monocle },
 };
 
 /* key definitions */
@@ -72,7 +71,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", nord_dark2, "-nf", col_gray3, "-sb", nord_dark, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", bg_norm, "-nf", fg_norm, "-sb", bg_selected, "-sf", fg_selected, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 static Key keys[] = {
@@ -120,7 +119,7 @@ static Key keys[] = {
 	{ 0,                            XF86XK_MonBrightnessUp,    spawn,          SHCMD("xbacklight -inc 10") },
 	{ 0,                            XF86XK_MonBrightnessDown,  spawn,          SHCMD("xbacklight -dec 10") },
 	{ MODKEY|ShiftMask,             XK_Return,                 spawn,          SHCMD("st") },
-	{ MODKEY,                       XK_p,                      spawn,          SHCMD("rofi -show drun") },
+	{ MODKEY,                       XK_p,                      spawn,          SHCMD("dmenu_run") },
 	{ MODKEY|ShiftMask,             XK_p, 	                   spawn,          SHCMD("sleep 0.2; scrot -s -e 'mv $f ~/Screenshots'") },
 	{ MODKEY|ControlMask|ShiftMask, XK_p,  	                   spawn,          SHCMD("sh ~/.config/dmneu/dmenu_shutdown") },
 };
