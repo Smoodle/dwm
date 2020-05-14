@@ -8,15 +8,15 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int horizpadbar        = 2;        /* horizontal padding for statusbar */
-static const int vertpadbar         = 6;        /* vertical padding for statusbar */
-static const char *fonts[]          = { "Hack Nerd Font:size=12" };
+static const int vertpadbar         = 3;        /* vertical padding for statusbar */
+static const char *fonts[]          = { "Inconsolata Nerd Font:size=10" };
 static const char dmenufont[]       = "Inconsolata Nerd Font:size=12";
 
-static const char fg_norm[] = "#bbbbbb";
+static const char fg_norm[] = "#c5c8c6";
 static const char fg_selected[] = "#cc6666";
 static const char bg_norm[] = "#1d1f21";
 static const char bg_selected[] = "#1d1f21";
-static const char border_norm[] = "#373b41";
+static const char border_norm[] = "#969896";
 static const char border_selected[] = "#cc6666";
 
 static const char *colors[][3]      = {
@@ -37,6 +37,7 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ NULL,       NULL,       "Microsoft Teams Notification",       0,       1,           -1 },
 };
 
 /* layout(s) */
@@ -73,9 +74,12 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", bg_norm, "-nf", fg_norm, "-sb", bg_selected, "-sf", fg_selected, NULL };
 static const char *termcmd[]  = { "st", NULL };
+static const char scratchpadname[] = "scratchpad";
+static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
 static Key keys[] = {
 	/* modifier                     key                        function        argument */
+	{ MODKEY|ShiftMask,             XK_s,                      togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_b,                      togglebar,      {0} },
 	{ MODKEY,                       XK_j,                      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,                      focusstack,     {.i = -1 } },
