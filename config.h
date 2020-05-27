@@ -9,8 +9,8 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int horizpadbar        = 2;        /* horizontal padding for statusbar */
 static const int vertpadbar         = 3;        /* vertical padding for statusbar */
-static const char *fonts[]          = { "Inconsolata Nerd Font:size=10" };
-static const char dmenufont[]       = "Inconsolata Nerd Font:size=12";
+static const char *fonts[]          = { "Hack Nerd Font:size=10" };
+static const char dmenufont[]       = "Hack Nerd Font:size=12";
 
 static const char fg_norm[] = "#c5c8c6";
 static const char fg_selected[] = "#cc6666";
@@ -124,7 +124,7 @@ static Key keys[] = {
 	{ 0,                            XF86XK_MonBrightnessDown,  spawn,          SHCMD("xbacklight -dec 10") },
 	{ MODKEY|ShiftMask,             XK_Return,                 spawn,          SHCMD("st") },
 	{ MODKEY,                       XK_p,                      spawn,          SHCMD("dmenu_run") },
-	{ MODKEY|ShiftMask,             XK_p, 	                   spawn,          SHCMD("sleep 0.2; scrot -s -e 'mv $f ~/Screenshots'") },
+	{ MODKEY|ShiftMask,             XK_p, 	                   spawn,          SHCMD("sleep 0.2; scrot -s -e 'mv $f ~/Pictures/Screenshots'") },
 	{ MODKEY|ControlMask|ShiftMask, XK_p,  	                   spawn,          SHCMD("sh ~/.config/dmneu/dmenu_shutdown") },
 };
 
