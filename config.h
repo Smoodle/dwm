@@ -12,17 +12,16 @@ static const int vertpadbar         = 3;        /* vertical padding for statusba
 static const char *fonts[]          = { "Hack Nerd Font:size=10" };
 static const char dmenufont[]       = "Hack Nerd Font:size=12";
 
-static const char fg_norm[] = "#c5c8c6";
-static const char fg_selected[] = "#cc6666";
-static const char bg_norm[] = "#1d1f21";
-static const char bg_selected[] = "#1d1f21";
-static const char border_norm[] = "#969896";
-static const char border_selected[] = "#cc6666";
-
-static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { fg_norm, bg_norm, border_norm },
-	[SchemeSel]  = { fg_selected, bg_selected, border_selected  },
+static char normbgcolor[]           = "#222222";
+static char normbordercolor[]       = "#444444";
+static char normfgcolor[]           = "#bbbbbb";
+static char selfgcolor[]            = "#eeeeee";
+static char selbordercolor[]        = "#005577";
+static char selbgcolor[]            = "#005577";
+static char *colors[][3] = {
+       /*               fg           bg           border   */
+       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
+       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
 };
 
 /* tagging */
@@ -74,7 +73,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", bg_norm, "-nf", fg_norm, "-sb", bg_selected, "-sf", fg_selected, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
@@ -107,6 +106,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period,                 focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,                  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period,                 tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_F5,     xrdb,           {.v = NULL } },
 	{ MODKEY,                       XK_minus,                  setgaps,        {.i = -5 } },
 	{ MODKEY,                       XK_plus,                   setgaps,        {.i = +5 } },
 	{ MODKEY|ShiftMask,             XK_r,  	                   setgaps,        {.i = 0  } },
