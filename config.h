@@ -7,8 +7,8 @@ static const unsigned int gappx     = 6;        /* gaps between windows */
 static const unsigned int snap      = 5;       	/* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int horizpadbar        = 2;        /* horizontal padding for statusbar */
-static const int vertpadbar         = 3;        /* vertical padding for statusbar */
+static const int horizpadbar        = 3;        /* horizontal padding for statusbar */
+static const int vertpadbar         = 5;        /* vertical padding for statusbar */
 static const char *fonts[]          = { "Hack Nerd Font:size=10" };
 static const char dmenufont[]       = "Hack Nerd Font:size=12";
 
@@ -25,8 +25,8 @@ static char *colors[][3] = {
 };
 
 /* tagging */
-static const char *tags[]    = { "", "", "", "", "" };
-static const char *alttags[] = { "", "", "", "", "" };
+static const char *tags[]    = { "", "", "", "", "", "", "", "", "" };
+static const char *alttags[] = { "", "", "", "", "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -44,10 +44,9 @@ static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] 
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
-static const int show_layout = 1;
-static const int show_name = 1;
+static const int show_layout = 0;
+static const int show_name = 0;
 static const int center_name = 0;
-
 static const int show_monocle_number = 0;
 
 static const Layout layouts[] = {
@@ -126,10 +125,11 @@ static Key keys[] = {
 	{ 0,                            XF86XK_AudioRaiseVolume,   spawn,          SHCMD("pactl set-sink-volume 0 +5%")},
 	{ 0,                            XF86XK_MonBrightnessUp,    spawn,          SHCMD("xbacklight -inc 10") },
 	{ 0,                            XF86XK_MonBrightnessDown,  spawn,          SHCMD("xbacklight -dec 10") },
+    //Hotkeys
 	{ MODKEY|ShiftMask,             XK_Return,                 spawn,          SHCMD("st") },
-	{ MODKEY,                       XK_p,                      spawn,          SHCMD("dmenu_run") },
-	{ MODKEY|ShiftMask,             XK_p, 	                   spawn,          SHCMD("sleep 0.2; scrot -s -e 'mv $f ~/Pictures/Screenshots'") },
-	{ MODKEY|ControlMask|ShiftMask, XK_p,  	                   spawn,          SHCMD("sh ~/.config/dmneu/dmenu_shutdown") },
+	{ MODKEY,                       XK_p,                      spawn,          SHCMD("sh ~/.scripts/dmenu/dmenu_run_history") },
+	{ MODKEY|ShiftMask,             XK_p, 	                   spawn,          SHCMD("sh ~/.scripts/screenshot") },
+	{ MODKEY|ControlMask|ShiftMask, XK_p,  	                   spawn,          SHCMD("sh ~/.scripts/dmenu/dmenu_shutdown") },
 };
 
 /* button definitions */
@@ -149,3 +149,10 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
 
+/* signal definitions */
+/* signum must be greater than 0 */
+/* trigger signals using `xsetroot -name "fsignal:<signum>"` */
+static Signal signals[] = {
+	/* signum       function        argument  */
+	{ 1,            xrdb,      {.v = NULL} },
+};
