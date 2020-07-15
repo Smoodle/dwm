@@ -901,13 +901,14 @@ drawbar(Monitor *m)
 				/* make sure name will not overlap on tags even when it is very long */
 				mid = mid >= lrpad / 2 ? mid : lrpad / 2;
 				drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
+
 				if(center_name == 1)
 					drw_text(drw, x, 0, w, bh, mid, show_name == 1 ? m->sel->name : "", 0);
 				else
 					drw_text(drw, x, 0, w, bh, lrpad / 2, show_name == 1 ? m->sel->name : "", 0);
 
 
-			if (m->sel->isfloating)
+			if (m->sel->isfloating && show_name == 1)
 				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
 
 		} else {
