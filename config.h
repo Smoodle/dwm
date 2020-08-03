@@ -44,18 +44,18 @@ static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] 
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
-static const int show_layout = 0;
-static const int show_name = 0;
-static const int center_name = 0;
+static const int show_layout = 1;
+static const int show_name = 1;
+static const int center_name = 1;
 static const int show_monocle_number = 0;
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ ": Tile :",      tile },    /* first entry is default */
-	{ ": Float :",     NULL },    /* no layout function means floating behavior */
-	{ ": Monocle :",   monocle },
-	{ ": Centered Master :",      centeredmaster },
-	{ ": F Centered Master :",      centeredfloatingmaster },
+	{ ": Tile ", tile },    /* first entry is default */
+	{ ": Float ", NULL },    /* no layout function means floating behavior */
+	{ ": Monocle ", monocle },
+	{ ": Centered Master ", centeredmaster },
+	{ ": F Centered Master ", centeredfloatingmaster },
 };
 
 /* key definitions */
@@ -120,9 +120,10 @@ static Key keys[] = {
 	TAGKEYS(                        XK_9,                                      8)
 	{ MODKEY|ShiftMask,             XK_q,                      quit,           {0} },
 	//Laptop
-	{ 0,                            XF86XK_AudioMute,          spawn,          SHCMD("pactl set-sink-mute 0 toggle") },
-	{ 0,                            XF86XK_AudioLowerVolume,   spawn,          SHCMD("pactl set-sink-volume 0 -5%") },
-	{ 0,                            XF86XK_AudioRaiseVolume,   spawn,          SHCMD("pactl set-sink-volume 0 +5%")},
+	{ 0,                            XF86XK_AudioMute,          spawn,          SHCMD("pactl -- set-sink-mute @DEFAULT_SINK@ toggle") },
+	{ 0,                            XF86XK_AudioMicMute,       spawn,          SHCMD("pactl -- set-source-mute @DEFAULT_SINK@ toggle")},
+	{ 0,                            XF86XK_AudioLowerVolume,   spawn,          SHCMD("pactl -- set-sink-volume @DEFAULT_SINK@ -5%") },
+	{ 0,                            XF86XK_AudioRaiseVolume,   spawn,          SHCMD("pactl -- set-sink-volume @DEFAULT_SINK@ +5%")},
 	{ 0,                            XF86XK_MonBrightnessUp,    spawn,          SHCMD("xbacklight -inc 10") },
 	{ 0,                            XF86XK_MonBrightnessDown,  spawn,          SHCMD("xbacklight -dec 10") },
     //Hotkeys

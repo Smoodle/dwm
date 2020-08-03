@@ -908,8 +908,8 @@ drawbar(Monitor *m)
 					drw_text(drw, x, 0, w, bh, lrpad / 2, show_name == 1 ? m->sel->name : "", 0);
 
 
-			if (m->sel->isfloating && show_name == 1)
-				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
+                if (m->sel->isfloating && show_name == 1)
+                    drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
 
 		} else {
 			drw_setscheme(drw, scheme[SchemeNorm]);
@@ -1251,12 +1251,12 @@ loadxrdb()
 			xrdb = XrmGetStringDatabase(resm);
 
 			if (xrdb != NULL) {
-				XRDB_LOAD_COLOR("dwm.color0", normbordercolor);
-				XRDB_LOAD_COLOR("dwm.color0", normbgcolor);
-				XRDB_LOAD_COLOR("dwm.color4", normfgcolor);
-				XRDB_LOAD_COLOR("dwm.color4", selbordercolor);
-				XRDB_LOAD_COLOR("dwm.color0", selbgcolor);
-				XRDB_LOAD_COLOR("dwm.color8", selfgcolor);
+				XRDB_LOAD_COLOR("dwm.background", normbordercolor);
+				XRDB_LOAD_COLOR("dwm.background", normbgcolor);
+				XRDB_LOAD_COLOR("dwm.foreground", normfgcolor);
+				XRDB_LOAD_COLOR("dwm.color12", selbordercolor);
+				XRDB_LOAD_COLOR("dwm.background", selbgcolor);
+				XRDB_LOAD_COLOR("dwm.color12", selfgcolor);
 			}
 		}
 	}
@@ -1436,7 +1436,7 @@ movemouse(const Arg *arg)
 			&& (abs(nx - c->x) > snap || abs(ny - c->y) > snap))
 				togglefloating(NULL);
 			if (!selmon->lt[selmon->sellt]->arrange || c->isfloating)
-				resize(c, nx, ny, c->w, c->h, 1);
+                resize(c, nx, ny, c->w, c->h, 1);
 			break;
 		}
 	} while (ev.type != ButtonRelease);
