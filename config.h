@@ -9,8 +9,8 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int horizpadbar        = 3;        /* horizontal padding for statusbar */
 static const int vertpadbar         = 5;        /* vertical padding for statusbar */
-static const char *fonts[]          = { "Hack Nerd Font:size=10" };
-static const char dmenufont[]       = "Hack Nerd Font:size=12";
+static const char *fonts[]          = { "mononoki Nerd Font:size=10" };
+static const char dmenufont[]       = "mononoki Nerd Font:size=12";
 
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
@@ -118,7 +118,8 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                                      6)
 	TAGKEYS(                        XK_8,                                      7)
 	TAGKEYS(                        XK_9,                                      8)
-	{ MODKEY|ShiftMask,             XK_q,                      quit,           {0} },
+	//{ MODKEY|ShiftMask,             XK_q,                      quit,           {0} },
+	{ MODKEY|ShiftMask,             XK_q,  	                   spawn,          SHCMD("sh ~/.scripts/dmenu/dmenu_shutdown") },
 	//Laptop
 	{ 0,                            XF86XK_AudioMute,          spawn,          SHCMD("pactl -- set-sink-mute @DEFAULT_SINK@ toggle") },
 	{ 0,                            XF86XK_AudioMicMute,       spawn,          SHCMD("pactl -- set-source-mute @DEFAULT_SINK@ toggle")},
@@ -128,9 +129,8 @@ static Key keys[] = {
 	{ 0,                            XF86XK_MonBrightnessDown,  spawn,          SHCMD("xbacklight -dec 10") },
     //Hotkeys
 	{ MODKEY|ShiftMask,             XK_Return,                 spawn,          SHCMD("st") },
-	{ MODKEY,                       XK_p,                      spawn,          SHCMD("sh ~/.scripts/dmenu/dmenu_run_history") },
+	{ MODKEY,                       XK_p,                      spawn,          SHCMD("bash ~/.scripts/dmenu_center") },
 	{ MODKEY|ShiftMask,             XK_p, 	                   spawn,          SHCMD("sh ~/.scripts/screenshot") },
-	{ MODKEY|ControlMask|ShiftMask, XK_p,  	                   spawn,          SHCMD("sh ~/.scripts/dmenu/dmenu_shutdown") },
 };
 
 /* button definitions */
