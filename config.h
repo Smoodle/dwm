@@ -9,7 +9,7 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int horizpadbar        = 3;        /* horizontal padding for statusbar */
 static const int vertpadbar         = 5;        /* vertical padding for statusbar */
-static const char *fonts[]          = { "mononoki Nerd Font:size=10" };
+static const char *fonts[]          = { "mononoki Nerd Font:size=12" };
 static const char dmenufont[]       = "mononoki Nerd Font:size=12";
 
 static char normbgcolor[]           = "#222222";
@@ -45,17 +45,17 @@ static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
 static const int show_layout = 1;
-static const int show_name = 1;
-static const int center_name = 1;
+static const int show_name = 0;
+static const int center_name = 0;
 static const int show_monocle_number = 0;
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ ": Tile ", tile },    /* first entry is default */
-	{ ": Float ", NULL },    /* no layout function means floating behavior */
-	{ ": Monocle ", monocle },
-	{ ": Centered Master ", centeredmaster },
-	{ ": F Centered Master ", centeredfloatingmaster },
+	{ ": Tile", tile },    /* first entry is default */
+	{ ": Float", NULL },    /* no layout function means floating behavior */
+	{ ": Monocle", monocle },
+	{ ": Centered Master", centeredmaster },
+	{ ": Centered F Master", centeredfloatingmaster },
 };
 
 /* key definitions */
@@ -120,7 +120,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_9,                                      8)
 	//{ MODKEY|ShiftMask,             XK_q,                      quit,           {0} },
 	{ MODKEY|ShiftMask,             XK_q,  	                   spawn,          SHCMD("sh ~/.scripts/dmenu/dmenu_shutdown") },
-	//Laptop
+	//Media Keys
 	{ 0,                            XF86XK_AudioMute,          spawn,          SHCMD("pactl -- set-sink-mute @DEFAULT_SINK@ toggle") },
 	{ 0,                            XF86XK_AudioMicMute,       spawn,          SHCMD("pactl -- set-source-mute @DEFAULT_SINK@ toggle")},
 	{ 0,                            XF86XK_AudioLowerVolume,   spawn,          SHCMD("pactl -- set-sink-volume @DEFAULT_SINK@ -5%") },
@@ -131,6 +131,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return,                 spawn,          SHCMD("st") },
 	{ MODKEY,                       XK_p,                      spawn,          SHCMD("bash ~/.scripts/dmenu_center") },
 	{ MODKEY|ShiftMask,             XK_p, 	                   spawn,          SHCMD("sh ~/.scripts/screenshot") },
+	{ MODKEY,                       XK_e,                      spawn,          SHCMD("thunar") },
 };
 
 /* button definitions */
