@@ -129,7 +129,7 @@ static Key keys[] = {
 	{ 0,                            XF86XK_MonBrightnessDown,  spawn,          SHCMD("xbacklight -dec 10") },
     //Hotkeys
 	{ MODKEY|ShiftMask,             XK_Return,                 spawn,          SHCMD("st") },
-	{ MODKEY,                       XK_p,                      spawn,          SHCMD("bash ~/.scripts/dmenu/dmenu_run_history") },
+	{ MODKEY,                       XK_p,                      spawn,          SHCMD("rofi -show drun") },
 	{ MODKEY|ShiftMask,             XK_p, 	                   spawn,          SHCMD("sh ~/.scripts/screenshot") },
 	{ MODKEY,                       XK_e,                      spawn,          SHCMD("thunar") },
 };
