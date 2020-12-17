@@ -42,7 +42,7 @@ static const Rule rules[] = {
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
 static const int show_layout = 1;
 static const int show_name = 0;
@@ -129,7 +129,7 @@ static Key keys[] = {
 	{ 0,                            XF86XK_MonBrightnessDown,  spawn,          SHCMD("xbacklight -dec 10") },
     //Hotkeys
 	{ MODKEY|ShiftMask,             XK_Return,                 spawn,          SHCMD("st") },
-	{ MODKEY,                       XK_p,                      spawn,          SHCMD("rofi -show drun") },
+	{ MODKEY,                       XK_p,                      spawn,          SHCMD("sh ~/.scripts/dmenu/dmenu_run_history") },
 	{ MODKEY|ShiftMask,             XK_p, 	                   spawn,          SHCMD("sh ~/.scripts/screenshot") },
 	{ MODKEY,                       XK_e,                      spawn,          SHCMD("thunar") },
 };
