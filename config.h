@@ -120,6 +120,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_9,                                      8)
 	//{ MODKEY|ShiftMask,             XK_q,                      quit,           {0} },
 	{ MODKEY|ShiftMask,             XK_q,  	                   spawn,          SHCMD("sh ~/.scripts/dmenu/dmenu_shutdown") },
+	{ MODKEY|ShiftMask,             XK_t,  	                   spawn,          SHCMD("sh ~/.scripts/dmenu_tablet_mode") },
 	//Media Keys
 	{ 0,                            XF86XK_AudioMute,          spawn,          SHCMD("pactl -- set-sink-mute @DEFAULT_SINK@ toggle") },
 	{ 0,                            XF86XK_AudioMicMute,       spawn,          SHCMD("pactl -- set-source-mute @DEFAULT_SINK@ toggle")},
