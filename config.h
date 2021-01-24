@@ -2,15 +2,15 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int gappx     = 6;        /* gaps between windows */
+static const unsigned int borderpx  = 3;        /* border pixel of windows */
+static const unsigned int gappx     = 10;        /* gaps between windows */
 static const unsigned int snap      = 5;       	/* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int horizpadbar        = 3;        /* horizontal padding for statusbar */
+static const int horizpadbar        = 2;        /* horizontal padding for statusbar */
 static const int vertpadbar         = 5;        /* vertical padding for statusbar */
-static const char *fonts[]          = { "mononoki Nerd Font:size=12" };
-static const char dmenufont[]       = "mononoki Nerd Font:size=12";
+static const char *fonts[]          = { "Hack Nerd Font:size=12" };
+static const char dmenufont[]       = "Hack Nerd Font:size=12";
 
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
@@ -34,8 +34,8 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	//{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+	{ "qBittorrent",  NULL,       NULL,         1 << 8,       0,           -1 },
 	{ NULL,       NULL,       "Microsoft Teams Notification",       0,       1,           -1 },
 };
 
@@ -45,17 +45,17 @@ static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
 static const int show_layout = 1;
-static const int show_name = 0;
+static const int show_name = 1;
 static const int center_name = 0;
 static const int show_monocle_number = 0;
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ ": Tile", tile },    /* first entry is default */
-	{ ": Float", NULL },    /* no layout function means floating behavior */
-	{ ": Monocle", monocle },
-	{ ": Centered Master", centeredmaster },
-	{ ": Centered F Master", centeredfloatingmaster },
+	{ ": Tile :", tile },    /* first entry is default */
+	{ ": Float :", NULL },    /* no layout function means floating behavior */
+	{ ": Monocle :", monocle },
+	{ ": Centered Master :", centeredmaster },
+	{ ": Centered F Master :", centeredfloatingmaster },
 };
 
 /* key definitions */
@@ -121,6 +121,7 @@ static Key keys[] = {
 	//{ MODKEY|ShiftMask,             XK_q,                      quit,           {0} },
 	{ MODKEY|ShiftMask,             XK_q,  	                   spawn,          SHCMD("sh ~/.scripts/dmenu/dmenu_shutdown") },
 	{ MODKEY|ShiftMask,             XK_t,  	                   spawn,          SHCMD("sh ~/.scripts/dmenu_tablet_mode") },
+	{ MODKEY,                       XK_a,  	                   spawn,          SHCMD("sh ~/.scripts/mpv_picker ~/Misc/Anime") },
 	//Media Keys
 	{ 0,                            XF86XK_AudioMute,          spawn,          SHCMD("pactl -- set-sink-mute @DEFAULT_SINK@ toggle") },
 	{ 0,                            XF86XK_AudioMicMute,       spawn,          SHCMD("pactl -- set-source-mute @DEFAULT_SINK@ toggle")},
@@ -133,6 +134,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,                      spawn,          SHCMD("sh ~/.scripts/dmenu/dmenu_run_history") },
 	{ MODKEY|ShiftMask,             XK_p, 	                   spawn,          SHCMD("sh ~/.scripts/screenshot") },
 	{ MODKEY,                       XK_e,                      spawn,          SHCMD("thunar") },
+	//{ MODKEY|ShiftMask,             XK_e, 	                   spawn,          SHCMD("emacsclient --no-wait --create-frame") },
 };
 
 /* button definitions */
@@ -158,4 +160,5 @@ static Button buttons[] = {
 static Signal signals[] = {
 	/* signum       function        argument  */
 	{ 1,            xrdb,      {.v = NULL} },
+	{ 2,            quit,      {.v = NULL} },
 };
