@@ -36,6 +36,7 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	//{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "qBittorrent",  NULL,       NULL,         1 << 8,       0,           -1 },
+	{ "Thunderbird",  NULL,       NULL,         1 << 7,       0,           -1 },
 	{ NULL,       NULL,       "Microsoft Teams Notification",       0,       1,           -1 },
 };
 
@@ -73,9 +74,9 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "kitty", NULL };
 static const char scratchpadname[] = "scratchpad";
-static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x30", NULL };
+static const char *scratchpadcmd[] = { "kitty", "-T", scratchpadname , NULL };
 
 static Key keys[] = {
 	/* modifier                     key                        function        argument */
@@ -119,9 +120,10 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                                      7)
 	TAGKEYS(                        XK_9,                                      8)
 	//{ MODKEY|ShiftMask,             XK_q,                      quit,           {0} },
-	{ MODKEY|ShiftMask,             XK_q,  	                   spawn,          SHCMD("sh ~/.scripts/dmenu/dmenu_shutdown") },
-	{ MODKEY|ShiftMask,             XK_t,  	                   spawn,          SHCMD("sh ~/.scripts/dmenu_tablet_mode") },
-	{ MODKEY,                       XK_a,  	                   spawn,          SHCMD("sh ~/.scripts/mpv_picker ~/Misc/Anime") },
+	{ MODKEY|ShiftMask,             XK_q,  	                   spawn,          SHCMD("bash ~/.scripts/dmenu/dmenu_shutdown") },
+	{ MODKEY|ShiftMask,             XK_t,  	                   spawn,          SHCMD("bash ~/.scripts/dmenu_tablet_mode") },
+	{ MODKEY,                       XK_a,  	                   spawn,          SHCMD("bash ~/.scripts/mpv_picker ~/Misc/Anime") },
+	{ MODKEY,                       XK_v,  	                   spawn,          SHCMD("mullvad-vpn") },
 	//Media Keys
 	{ 0,                            XF86XK_AudioMute,          spawn,          SHCMD("pactl -- set-sink-mute @DEFAULT_SINK@ toggle") },
 	{ 0,                            XF86XK_AudioMicMute,       spawn,          SHCMD("pactl -- set-source-mute @DEFAULT_SINK@ toggle")},
@@ -130,10 +132,10 @@ static Key keys[] = {
 	{ 0,                            XF86XK_MonBrightnessUp,    spawn,          SHCMD("xbacklight -inc 10") },
 	{ 0,                            XF86XK_MonBrightnessDown,  spawn,          SHCMD("xbacklight -dec 10") },
     //Hotkeys
-	{ MODKEY|ShiftMask,             XK_Return,                 spawn,          SHCMD("st") },
-	{ MODKEY,                       XK_p,                      spawn,          SHCMD("sh ~/.scripts/dmenu/dmenu_run_history") },
-	{ MODKEY|ShiftMask,             XK_p, 	                   spawn,          SHCMD("sh ~/.scripts/screenshot") },
-	{ MODKEY,                       XK_e,                      spawn,          SHCMD("thunar") },
+	{ MODKEY|ShiftMask,             XK_Return,                 spawn,          SHCMD("kitty") },
+	{ MODKEY,                       XK_p,                      spawn,          SHCMD("bash ~/.scripts/dmenu/dmenu_run_history") },
+	{ MODKEY|ShiftMask,             XK_p, 	                   spawn,          SHCMD("bash ~/.scripts/screenshot") },
+	{ MODKEY,                       XK_e,                      spawn,          SHCMD("pcmanfm") },
 	//{ MODKEY|ShiftMask,             XK_e, 	                   spawn,          SHCMD("emacsclient --no-wait --create-frame") },
 };
 
